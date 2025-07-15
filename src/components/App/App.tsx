@@ -1,9 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
+import MovieModal from "../MovieModal/MovieModal";
 import type { Movie } from "../../types/movie";
 
 import { fetchMovies } from "../../services/movieService";
@@ -18,12 +19,14 @@ export default function App() {
   const [isError, setIsError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const handleSubmit = async (topic: string) => {
-    try {
-      setIsLoading(true);
+  const handleSubmit = async (query: string) => {
+    setIsLoading(true);
+    setIsError(false);
+    setMovies([]);
 
-      setIsError(false);
-      const data = await fetchMovies(topic);
+    try {
+      const data = await fetchMovies(query);
+
       setMovies(data);
     } catch {
       setIsError(true);
@@ -39,6 +42,12 @@ export default function App() {
       {isError && <ErrorMessage />}
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={setSelectedMovie} />
+      )}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
       )}
     </>
   );

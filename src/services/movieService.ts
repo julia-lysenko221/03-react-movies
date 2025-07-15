@@ -1,18 +1,3 @@
-// import axios from "axios";
-// import type { Movie } from "../types/movie";
-
-// interface MoviesHttpResponse {
-//   hits: Movie[];
-// }
-
-// // HTTP-функція запиту статей
-// export const fetchMovies = async (topic: string): Promise<Movie[]> => {
-//   const response = await axios.get<MoviesHttpResponse>(
-//     `https://hn.algolia.com/api/v1/search?query=${topic}`
-//   );
-//   return response.data.hits;
-// };
-
 import axios from "axios";
 import type { Movie } from "../types/movie";
 
