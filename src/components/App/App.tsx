@@ -9,7 +9,7 @@ import type { Movie } from "../../types/movie";
 
 import { fetchMovies } from "../../services/movieService";
 
-import css from "./App.module.css";
+// import css from "./App.module.css";
 
 import { Toaster } from "react-hot-toast";
 
