@@ -11,7 +11,7 @@ import { fetchMovies } from "../../services/movieService";
 
 // import css from "./App.module.css";
 
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -26,6 +26,10 @@ export default function App() {
 
     try {
       const data = await fetchMovies(query);
+
+      if (data.length === 0) {
+        toast.error("No movies found for your request.");
+      }
 
       setMovies(data);
     } catch {

@@ -1,6 +1,10 @@
 import axios from "axios";
 import type { Movie } from "../types/movie";
 
+interface MovieApiResponse {
+  results: Movie[];
+}
+
 const BASE_URL = "https://api.themoviedb.org/3/search/movie";
 
 export async function fetchMovies(query: string): Promise<Movie[]> {
@@ -15,6 +19,6 @@ export async function fetchMovies(query: string): Promise<Movie[]> {
     },
   };
 
-  const { data } = await axios.get(BASE_URL, config);
+  const { data } = await axios.get<MovieApiResponse>(BASE_URL, config);
   return data.results;
 }
